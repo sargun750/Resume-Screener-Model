@@ -1,6 +1,11 @@
 from flask import Flask, request, jsonify
-from werkzeug.utils import secure_filename
+import requests
+import fitz  # Module from PyMuPDF library
 import os
+import json
+from werkzeug.utils import secure_filename
+from sentence_transformers import SentenceTransformer, util
+
 from PDF_Conversion import pdf_to_text
 from LLM_api import mistral_7b_score
 from S_BERT_Model import sentence_bert
