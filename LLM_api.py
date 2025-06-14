@@ -1,3 +1,5 @@
+import requests
+import json
 def mistral_7b_score(resume_text, job_desc): # way 2
     
     url = "https://openrouter.ai/api/v1/chat/completions"
