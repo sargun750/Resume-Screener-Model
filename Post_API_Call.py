@@ -19,10 +19,6 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 # Ensure upload folder exists
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
-def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
 @app.route('/api/findscore', methods=['POST'])
 def register_user():
     if 'pdf' not in request.files:
