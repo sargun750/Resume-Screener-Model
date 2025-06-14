@@ -22,7 +22,7 @@ def mistral_7b_score(resume_text, job_desc): # way 2
                 "content": f"Resume: {resume_text}\nJob Description: {job_desc}\n\nScore compatibility."
             }
         ],
-        "temperature": 0.3,
+        "temperature": 0.3, # Controls randomness/creativity of model
         "response_format": {"type": "json_object"}
     }
 
