@@ -24,7 +24,7 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @app.route('/api/findscore', methods=['POST'])
-def register_user():
+def find_score():
     if 'pdf' not in request.files:
         return jsonify({'error': 'No PDF file provided'}), 400
     
@@ -33,7 +33,7 @@ def register_user():
         return jsonify({'error': 'No text string provided'}), 400
     
     file = request.files['pdf']
-    Job_desc = request.form['text']
+    Job_description = request.form['text']
     # Validate PDF file
     if file.filename == '':
         return jsonify({'error': 'No selected PDF file'}), 400
@@ -47,11 +47,11 @@ def register_user():
 
         Resume_text = pdf_to_text(filepath)
 
-        LLM_response = mistral_7b_score(Resume_text, Job_desc)
+        LLM_response = mistral_7b_score(Resume_text, Job_description)
         LLM_Score = int(LLM_response["score"])
         Reason = LLM_response['reason']
 
-        Score = sentence_bert(Resume_text, Job_desc)
+        Score = sentence_bert(Resume_text, Job_description)
         SBERT_Score = round(Score * 100, 2)
 
         Final = 0.25 * SBERT_Score + 0.75 * LLM_Score # Coeff can be adjusted
